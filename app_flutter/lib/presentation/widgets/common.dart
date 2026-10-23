@@ -271,7 +271,7 @@ class RulesList extends StatelessWidget {
                 child: Text(c.label, style: body(14, weight: FontWeight.w600)),
               ),
               const SizedBox(width: 8),
-              // La regla usa su ancho natural, con tope para que 
+              // La regla usa su ancho natural, con tope para que
               // en pantallas angostas pase a dos líneas.
               ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 170),
@@ -302,7 +302,7 @@ class DashedBorder extends StatelessWidget {
     this.fill,
   });
 
-    @override
+  @override
   Widget build(BuildContext context) =>
       CustomPaint(painter: _DashedPainter(radius, color, fill), child: child);
 }
@@ -336,4 +336,3 @@ class _DashedPainter extends CustomPainter {
   bool shouldRepaint(_DashedPainter old) =>
       old.color != color || old.radius != radius || old.fill != fill;
 }
-
