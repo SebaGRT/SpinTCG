@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { normalizePlayer, fetchCatalog, parseRecord } from './adapter.mjs';
+import { readFileSync } from 'node:fs';
 
 test('Respuesta de ejemplo de la documentación (récord como texto)', () => {
   // Fila del ranking y estadísticas copiadas de tennisapidoc.matchstat.com.
@@ -48,5 +49,16 @@ test('Una consulta de ranking y una de carrera por jugador; mínimo seis', async
 
   // Un ranking vacío no alcanza las 6 cartas mínimas.
   await assert.rejects(() => fetchCatalog(async () => ({ data: [] }), { count: 6 }));
+});
+
+test('Respuesta real de RapidAPI guardada en fixtures/', () => {
+  const read = (name) => JSON.parse(readFileSync(new URL(`./fixtures/${name}`, import.meta.url)));
+  const ranking = read('ranking-singles.json');
+  const stats = read('player-statistics.json');
+
+  const card = normalizePlayer(ranking.data[0], stats);
+  assert.equal(card.ranking, 1);
+  assert.ok(card.winRate > 0 && card.winRate <= 100);
+  assert.ok(card.titles >= 0);
 });
 
