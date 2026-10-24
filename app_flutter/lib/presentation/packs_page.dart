@@ -41,7 +41,7 @@ class PacksPage extends StatelessWidget {
     }
   }
 
-    // --- La pantalla ---
+  // --- La pantalla ---
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +149,7 @@ class PacksPage extends StatelessWidget {
     );
   }
 
-    // --- Piezas pequeñas ---
+  // --- Piezas pequeñas ---
 
   Widget _ring(double size, Color color) => Container(
     width: size,
@@ -181,7 +181,7 @@ class PacksPage extends StatelessWidget {
     ),
   );
 
-    Widget _tag(String text) => Container(
+  Widget _tag(String text) => Container(
     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
     decoration: BoxDecoration(
       color: Court.c50,
@@ -194,4 +194,3 @@ class PacksPage extends StatelessWidget {
     ),
   );
 }
-

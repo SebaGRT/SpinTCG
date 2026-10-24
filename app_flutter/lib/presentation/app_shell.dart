@@ -3,6 +3,7 @@ import '../application/app_controller.dart';
 import 'home_page.dart';
 import 'navigation.dart';
 import 'pendiente.dart';
+import 'play_page.dart';
 import 'theme.dart';
 import 'widgets/court_button.dart';
 
@@ -54,7 +55,7 @@ class AppShell extends StatelessWidget {
               HomePage(app: app),
               const PantallaPendiente('Coleccion', owner: 'Emma * viernes'),
               const PantallaPendiente('Sobres', owner: 'Miguel * jueves'),
-              const PantallaPendiente('Jugar', owner: 'Sebastian * viernes'),
+              PlayPage(app: app),
             ],
           ),
         ),

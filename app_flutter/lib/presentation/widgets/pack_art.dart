@@ -59,7 +59,7 @@ class _PackPainter extends CustomPainter {
     );
   }
 
-    @override
+  @override
   void paint(Canvas canvas, Size size) {
     canvas.scale(size.width / 200, size.height / 290);
     const flap = Color(0xff155c3f);
@@ -135,7 +135,7 @@ class _PackPainter extends CustomPainter {
       Paint()..color = flap,
     );
 
-        final lines = Paint()
+    final lines = Paint()
       ..color = Colors.white.withValues(alpha: 0.18)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.2;
@@ -197,4 +197,3 @@ class _PackPainter extends CustomPainter {
   @override
   bool shouldRepaint(_PackPainter old) => old.opened != opened;
 }
-
