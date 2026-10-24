@@ -124,7 +124,7 @@ class _RevealPageState extends State<RevealPage> {
     );
   }
 
-    // --- Una carta y su etiqueta ---
+  // --- Una carta y su etiqueta ---
 
   Widget _card(int i) {
     if (i >= widget.cards.length) return const SizedBox.shrink();
@@ -159,7 +159,7 @@ class _RevealPageState extends State<RevealPage> {
     );
   }
 
-    /// Etiqueta "Nueva" o "Duplicada · ×N" sobre la carta revelada.
+  /// Etiqueta "Nueva" o "Duplicada · ×N" sobre la carta revelada.
   Widget _badge(PackCard pack) => Container(
     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
     decoration: BoxDecoration(
@@ -188,4 +188,3 @@ class _RevealPageState extends State<RevealPage> {
     ),
   );
 }
-
