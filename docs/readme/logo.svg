@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
+  <!-- Logo de SpinTCG: el mismo BrandLogo de la app (Court.c800 y Court.ball). -->
+  <rect width="80" height="80" rx="26" fill="#0f4630"/>
+  <g fill="none" stroke="#dcf04a" stroke-width="4" stroke-linecap="round">
+    <circle cx="40" cy="40" r="20"/>
+    <path d="M24.5 27.5a20 20 0 0 1 0 25"/>
+    <path d="M55.5 27.5a20 20 0 0 0 0 25"/>
+  </g>
+</svg>
