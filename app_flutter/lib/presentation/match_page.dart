@@ -9,6 +9,8 @@ import 'widgets/court_button.dart';
 import 'widgets/court_lines.dart';
 import 'widgets/flip_card.dart';
 import 'widgets/player_card.dart';
+import 'navigation.dart';
+import 'result_page.dart';
 
 class MatchPage extends StatefulWidget {
   final AppController app;
@@ -31,9 +33,12 @@ class _MatchPageState extends State<MatchPage> {
 
   void next() {
     if (m.finished) {
-      // PROVISIONAL, EL MIGUEL HACE EL DEFINITIVO
-
-      Navigator.pop(context);
+      openPage(
+        context,
+        widget.app,
+        () => ResultPage(app: widget.app, match: m),
+        replace: true,
+      );
     } else {
       setState(() {
         selected = null;
