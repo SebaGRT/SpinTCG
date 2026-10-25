@@ -5,6 +5,7 @@ import 'errores.dart';
 import 'navigation.dart';
 import 'team_page.dart';
 import 'theme.dart';
+import 'widgets/card_hero.dart';
 import 'widgets/common.dart';
 import 'widgets/countries.dart';
 import 'widgets/court_button.dart';
@@ -85,13 +86,16 @@ class DetailPage extends StatelessWidget {
     child: Center(
       child: SizedBox(
         width: 230,
-        child: PlayerCard(
-          card: card,
-          number: number,
-          total: app.catalog.length,
-          copies: copies,
-          size: CardSize.lg,
-          inTeam: inTeam,
+        child: CardHero(
+          id: card.id,
+          child: PlayerCard(
+            card: card,
+            number: number,
+            total: app.catalog.length,
+            copies: copies,
+            size: CardSize.lg,
+            inTeam: inTeam,
+          ),
         ),
       ),
     ),

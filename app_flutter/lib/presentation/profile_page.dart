@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../application/app_controller.dart';
+import '../application/session_controller.dart';
+import '../data/cloud.dart';
+import 'account_page.dart';
 import 'errores.dart';
+import 'navigation.dart';
+import 'ranking_page.dart';
 import 'theme.dart';
 import 'widgets/common.dart';
 import 'widgets/court_button.dart';
@@ -139,30 +145,19 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Material(
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  side: const BorderSide(color: Court.line),
-                ),
-                child: ListTile(
-                  onTap: showRules,
-                  leading: const Icon(Icons.info_outline, color: Court.c700),
-                  title: Text(
-                    'Cómo se juega',
-                    style: body(15, weight: FontWeight.w600),
-                  ),
-                  trailing: const Icon(Icons.chevron_right, color: Court.muted),
-                ),
-              ),
+            _link(Icons.info_outline, 'Cómo se juega', showRules),
+            const SizedBox(height: 8),
+            _link(
+              Icons.leaderboard_outlined,
+              'Ranking ATP',
+              () => openPage(context, app, () => RankingPage(app: app)),
             ),
+            // La cuenta solo existe con Supabase configurado.
+            if (cloudEnabled) ...[const SizedBox(height: 8), _accountLink()],
             const SizedBox(height: 16),
             Center(
               child: Text(
-                'Tu perfil se guarda solo en este dispositivo. '
-                'No necesitas registrarte.',
+                'Tu progreso se guarda en este dispositivo.',
                 textAlign: TextAlign.center,
                 style: body(12, color: Court.muted),
               ),
@@ -257,4 +252,45 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     ],
   );
+
+  // --- Enlaces: reglas, ranking y cuenta ---
+
+  /// Una fila blanca que abre algo. `subtitle` es opcional.
+  Widget _link(
+    IconData icon,
+    String title,
+    VoidCallback onTap, {
+    String? subtitle,
+  }) => Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 20),
+    child: Material(
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: const BorderSide(color: Court.line),
+      ),
+      child: ListTile(
+        onTap: onTap,
+        leading: Icon(icon, color: Court.c700),
+        title: Text(title, style: body(15, weight: FontWeight.w600)),
+        subtitle: subtitle == null
+            ? null
+            : Text(subtitle, style: body(12, color: Court.muted)),
+        trailing: const Icon(Icons.chevron_right, color: Court.muted),
+      ),
+    ),
+  );
+
+  /// Cuenta de Supabase: muestra el correo de la sesión (Provider).
+  Widget _accountLink() {
+    final session = context.watch<SessionController>();
+    return _link(
+      Icons.cloud_outlined,
+      'Cuenta y equipos guardados',
+      () => Navigator.of(
+        context,
+      ).push(MaterialPageRoute<void>(builder: (_) => const AccountPage())),
+      subtitle: session.email,
+    );
+  }
 }
