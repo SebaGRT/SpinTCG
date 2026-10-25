@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../application/app_controller.dart';
+import 'collection_page.dart';
 import 'home_page.dart';
 import 'navigation.dart';
 import 'pendiente.dart';
@@ -53,7 +54,7 @@ class AppShell extends StatelessWidget {
             index: tab.value,
             children: [
               HomePage(app: app),
-              const PantallaPendiente('Coleccion', owner: 'Emma * viernes'),
+              CollectionPage(app: app),
               const PantallaPendiente('Sobres', owner: 'Miguel * jueves'),
               PlayPage(app: app),
             ],
