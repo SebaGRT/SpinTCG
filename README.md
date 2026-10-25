@@ -22,7 +22,7 @@
   <p align="center">
     Juego de cartas coleccionables de tenis para Android, con estadísticas reales de tenistas ATP.
     <br />
-    <a href="docs/"><strong>Explorar la documentación »</strong></a>
+    <a href="docs/api-tennis.md"><strong>Explorar la documentación »</strong></a>
     <br />
     <br />
     <a href="#uso">Ver capturas</a>
@@ -67,9 +67,9 @@
 ## Acerca del proyecto
 
 <div align="center">
-  <img src="docs/guias/objetivo/09-inicio.png" alt="Inicio de SpinTCG" width="240">
-  <img src="docs/guias/objetivo/02-coleccion.png" alt="Colección" width="240">
-  <img src="docs/guias/objetivo/13-partida-revelada.png" alt="Partida" width="240">
+  <img src="docs/capturas/09-inicio.png" alt="Inicio de SpinTCG" width="240">
+  <img src="docs/capturas/02-coleccion.png" alt="Colección" width="240">
+  <img src="docs/capturas/13-partida-revelada.png" alt="Partida" width="240">
 </div>
 <br />
 
@@ -106,7 +106,11 @@ flowchart LR
 | Widgets propios en archivos separados | `lib/presentation/widgets/` |
 | GitHub con commits de todos | [Contribuidores](https://github.com/SebaGRT/SpinTCG/graphs/contributors) |
 
-El diseño sigue el mockup **Court Cards**, con la marca cambiada a SpinTCG. Las diferencias declaradas con el mockup están en el [índice de guías](docs/guias/README.md#qué-cambia-respecto-del-mockup).
+El diseño sigue el mockup **Court Cards**. Diferencias declaradas:
+* **Marca:** el mockup dice *Court Cards*; la app dice **SpinTCG** (constante `kBrand` en `theme.dart`).
+* **Fotos:** en lugar de fotos de tenistas, la app dibuja una figura ilustrada (`PlayerFigure`), así no usa imágenes con derechos de autor.
+* **Banner de la ronda:** si la regla no cabe al lado del atributo, baja a una segunda línea.
+* **Botón de Sobres:** queda abajo de la pantalla, como en el diseño original.
 
 <p align="right">(<a href="#readme-top">volver arriba</a>)</p>
 
@@ -227,10 +231,8 @@ cd app_flutter/servidor_api && node --test adapter.test.mjs
 
 | | | | |
 |:---:|:---:|:---:|:---:|
-| <img src="docs/guias/objetivo/01-inicio-sin-equipo.png" width="180"><br>Inicio | <img src="docs/guias/objetivo/06-sobres.png" width="180"><br>Sobre diario | <img src="docs/guias/objetivo/08-revelar-3.png" width="180"><br>Revelación | <img src="docs/guias/objetivo/03-detalle.png" width="180"><br>Detalle |
-| <img src="docs/guias/objetivo/04-equipo.png" width="180"><br>Elegir equipo | <img src="docs/guias/objetivo/11-partida.png" width="180"><br>Partida | <img src="docs/guias/objetivo/14-resultado.png" width="180"><br>Resultado | <img src="docs/guias/objetivo/10-perfil.png" width="180"><br>Perfil |
-
-_Más detalles: la arquitectura está en [`docs/kit/01-arquitectura.md`](docs/kit/01-arquitectura.md), la revisión de la API en [`docs/api-tennis.md`](docs/api-tennis.md) y la evidencia de pruebas en [`docs/evidencia/`](docs/evidencia/)._
+| <img src="docs/capturas/01-inicio-sin-equipo.png" width="180"><br>Inicio | <img src="docs/capturas/06-sobres.png" width="180"><br>Sobre diario | <img src="docs/capturas/08-revelar-3.png" width="180"><br>Revelación | <img src="docs/capturas/03-detalle.png" width="180"><br>Detalle |
+| <img src="docs/capturas/04-equipo.png" width="180"><br>Elegir equipo | <img src="docs/capturas/11-partida.png" width="180"><br>Partida | <img src="docs/capturas/14-resultado.png" width="180"><br>Resultado | <img src="docs/capturas/10-perfil.png" width="180"><br>Perfil |
 
 <p align="right">(<a href="#readme-top">volver arriba</a>)</p>
 
@@ -273,8 +275,6 @@ Así trabaja el equipo:
 3. Commit con un mensaje que diga qué cambia (`git commit -m 'Pantalla Resultado que guarda la partida'`)
 4. Subir la rama (`git push -u origin nombre/diaN-tema`)
 5. Abrir un Pull Request (`gh pr create --fill`). Sebastián lo integra a `main`
-
-Las guías de código de cada integrante están en [`docs/guias/`](docs/guias/README.md).
 
 ### Contribuidores
 
