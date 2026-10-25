@@ -55,7 +55,7 @@ class _ResultPageState extends State<ResultPage> {
     if (mounted) setState(() => saving = false);
   }
 
-    /// Nueva partida con el mismo equipo; reemplaza esta pantalla.
+  /// Nueva partida con el mismo equipo; reemplaza esta pantalla.
   void playAgain() {
     final match = widget.app.startMatch();
     openPage(
@@ -66,7 +66,7 @@ class _ResultPageState extends State<ResultPage> {
     );
   }
 
-    // --- La pantalla ---
+  // --- La pantalla ---
 
   @override
   Widget build(BuildContext context) => PopScope(
@@ -79,7 +79,7 @@ class _ResultPageState extends State<ResultPage> {
     ),
   );
 
-    // --- Encabezado según el resultado ---
+  // --- Encabezado según el resultado ---
 
   Widget _header() {
     final win = outcome == 1;
@@ -191,7 +191,7 @@ class _ResultPageState extends State<ResultPage> {
         ],
       );
 
-        // --- Resumen, guardado y botones ---
+  // --- Resumen, guardado y botones ---
 
   Widget _summary(BuildContext context) => Padding(
     padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -239,7 +239,7 @@ class _ResultPageState extends State<ResultPage> {
     ),
   );
 
-    // --- Una fila del resumen ---
+  // --- Una fila del resumen ---
 
   /// Una fila del resumen: ronda, atributo, valores y quién ganó.
   Widget _roundRow(int i, RoundResult r) {

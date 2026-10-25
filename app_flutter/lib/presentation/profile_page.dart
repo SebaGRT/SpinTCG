@@ -25,7 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
     super.dispose();
   }
 
-    Future<void> save() async {
+  Future<void> save() async {
     try {
       await widget.app.saveNickname(nickname.text);
       if (!mounted) return;
@@ -38,7 +38,7 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
-    // --- Reglas en una hoja ---
+  // --- Reglas en una hoja ---
 
   void showRules() => showModalBottomSheet<void>(
     context: context,
@@ -69,7 +69,7 @@ class _ProfilePageState extends State<ProfilePage> {
     ),
   );
 
-    // --- La pantalla ---
+  // --- La pantalla ---
 
   @override
   Widget build(BuildContext context) {
@@ -173,7 +173,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-    // --- Ver y editar el apodo ---
+  // --- Ver y editar el apodo ---
 
   /// Apodo grande con el lápiz para editar.
   Widget _nickname() => Center(
@@ -210,7 +210,7 @@ class _ProfilePageState extends State<ProfilePage> {
     ),
   );
 
-    /// Campo de texto + Guardar. El error aparece bajo el campo.
+  /// Campo de texto + Guardar. El error aparece bajo el campo.
   Widget _editor(AppController app) => Row(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
