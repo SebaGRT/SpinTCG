@@ -4,6 +4,7 @@ import 'detail_page.dart';
 import 'navigation.dart';
 import 'team_page.dart';
 import 'theme.dart';
+import 'widgets/card_hero.dart';
 import 'widgets/common.dart';
 import 'widgets/court_button.dart';
 import 'widgets/player_card.dart';
@@ -91,20 +92,23 @@ class _CollectionPageState extends State<CollectionPage> {
               childAspectRatio: 5 / 7,
               children: [
                 for (final card in cards)
-                  PlayerCard(
-                    card: card,
-                    number: app.numberOf(card),
-                    total: app.catalog.length,
-                    copies: app.copies[card.id] ?? 0,
-                    locked: (app.copies[card.id] ?? 0) == 0,
-                    inTeam: app.team.contains(card.id),
-                    onTap: (app.copies[card.id] ?? 0) == 0
-                        ? null
-                        : () => openPage(
-                            context,
-                            app,
-                            () => DetailPage(app: app, card: card),
-                          ),
+                  CardHero(
+                    id: card.id,
+                    child: PlayerCard(
+                      card: card,
+                      number: app.numberOf(card),
+                      total: app.catalog.length,
+                      copies: app.copies[card.id] ?? 0,
+                      locked: (app.copies[card.id] ?? 0) == 0,
+                      inTeam: app.team.contains(card.id),
+                      onTap: (app.copies[card.id] ?? 0) == 0
+                          ? null
+                          : () => openPage(
+                              context,
+                              app,
+                              () => DetailPage(app: app, card: card),
+                            ),
+                    ),
                   ),
               ],
             ),

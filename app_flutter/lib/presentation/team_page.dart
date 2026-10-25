@@ -153,11 +153,16 @@ class _TeamPageState extends State<TeamPage> {
     final blocked = !selected && draft.length == 3;
     final copies = app.copies[card.id] ?? 0;
 
-    return Opacity(
+    // Animaciones implícitas: al cambiar `selected` o `blocked`, Flutter
+    // anima solo el cambio de opacidad, color y borde.
+    return AnimatedOpacity(
+      duration: const Duration(milliseconds: 200),
       opacity: blocked ? 0.45 : 1,
       child: GestureDetector(
         onTap: blocked ? null : () => toggle(card.id),
-        child: Container(
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.easeOut,
           margin: const EdgeInsets.only(bottom: 8),
           padding: const EdgeInsets.fromLTRB(8, 8, 12, 8),
           decoration: BoxDecoration(
