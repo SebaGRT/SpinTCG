@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:spintcg/presentation/packs_page.dart';
 import '../application/app_controller.dart';
 import 'collection_page.dart';
 import 'home_page.dart';
 import 'navigation.dart';
-import 'pendiente.dart';
 import 'play_page.dart';
 import 'theme.dart';
 import 'widgets/court_button.dart';
@@ -55,7 +55,7 @@ class AppShell extends StatelessWidget {
             children: [
               HomePage(app: app),
               CollectionPage(app: app),
-              const PantallaPendiente('Sobres', owner: 'Miguel * jueves'),
+              PacksPage(app: app),
               PlayPage(app: app),
             ],
           ),
