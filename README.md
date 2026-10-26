@@ -223,7 +223,7 @@ adb install -r build/app/outputs/flutter-apk/app-debug.apk
 **Pruebas:**
 
 ```sh
-cd app_flutter && flutter analyze && flutter test        # 20 pruebas: reglas, progreso, catálogo, interfaz y cuenta
+cd app_flutter && flutter analyze && flutter test        # 10 pruebas: catálogo, interfaz y cuenta
 cd app_flutter/servidor_api && node --test adapter.test.mjs
 ```
 

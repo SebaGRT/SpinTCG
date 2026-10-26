@@ -6,7 +6,7 @@ const _countries = {
   'BRA': 'Brasil',
   'BUL': 'Bulgaria',
   'CAN': 'Canadá',
-  'CHL': 'Chile',
+  'CHI': 'Chile',
   'CHN': 'China',
   'COL': 'Colombia',
   'CRO': 'Croacia',

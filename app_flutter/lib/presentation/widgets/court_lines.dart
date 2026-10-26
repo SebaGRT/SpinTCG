@@ -25,7 +25,7 @@ class _CourtPainter extends CustomPainter {
       ..strokeWidth = 0.8;
 
     canvas.drawRect(Rect.fromPoints(p(8, 8), p(92, 132)), line);
-    canvas.drawLine(p(8, 18), p(18, 132), line);
+    canvas.drawLine(p(18, 8), p(18, 132), line);
     canvas.drawLine(p(82, 8), p(82, 132), line);
     canvas.drawLine(p(18, 40), p(82, 40), line);
     canvas.drawLine(p(18, 100), p(82, 100), line);
@@ -37,7 +37,7 @@ class _CourtPainter extends CustomPainter {
 
     final y = p(0, 70).dy;
 
-    for (var x = p(8, 0).dx; x <= p(92, 0).dx; x += 4) {
+    for (var x = p(8, 0).dx; x < p(92, 0).dx; x += 4) {
       canvas.drawLine(Offset(x, y), Offset(x + 2, y), net);
     }
   }

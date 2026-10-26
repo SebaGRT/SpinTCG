@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:spintcg/presentation/packs_page.dart';
 import '../application/app_controller.dart';
 import 'collection_page.dart';
 import 'home_page.dart';
 import 'navigation.dart';
+import 'packs_page.dart';
 import 'play_page.dart';
 import 'theme.dart';
 import 'widgets/court_button.dart';
@@ -110,7 +110,7 @@ class _BottomNav extends StatelessWidget {
         onDestinationSelected: onSelect,
         destinations: [
           const NavigationDestination(
-            icon: Icon(Icons.style_outlined),
+            icon: Icon(Icons.home_outlined),
             label: 'Inicio',
           ),
           const NavigationDestination(
