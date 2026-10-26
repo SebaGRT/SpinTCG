@@ -1,8 +1,8 @@
 # Revisión de la API de tenis (Matchstat · RapidAPI)
 
-Documentación: <https://tennisapidoc.matchstat.com/>, revisada el 22 de octubre de 2026 contra `servidor_api/`. Es el mismo proveedor que citaba el kit (`docs.tennis-api.com`): mismo host y mismas rutas.
+Documentación: <https://tennisapidoc.matchstat.com/>, revisada el 22 de octubre de 2026 contra `app_flutter/servidor_api/`. Es el mismo proveedor que `docs.tennis-api.com`: mismo host y mismas rutas.
 
-> La documentación no reemplaza una consulta real con la cuenta del grupo. Los fixtures del jueves (`servidor_api/fixtures/`) tienen la última palabra.
+> La documentación no reemplaza una consulta real con la cuenta del grupo. Las respuestas reales guardadas en `app_flutter/servidor_api/fixtures/` tienen la última palabra.
 
 ## Lo que usamos
 
@@ -28,13 +28,13 @@ La propia documentación se contradice: su tabla de campos dice que `total` es u
 
 En el ejemplo, `totalTitles` = 36, `totalTitlesWon` = 31 y `totalFinalsWon` = 5. Como 36 = 31 + 5, `totalTitles` cuenta **finales jugadas**. La documentación no lo aclara. El adaptador probaba `totalTitlesWon ?? totalFinalsWon ?? totalTitles`: si faltaba el primero, habría mostrado finales como títulos. Ahora usa solo `totalTitlesWon`, y si falta, descarta al tenista.
 
-### 3. Decisión pendiente: `includeAll=true`
+### 3. Qué partidos cuenta el récord: `includeAll=true`
 
 Con `includeAll=true`, el récord suma Challenger, ITF y clasificaciones. Sin ese parámetro, cuenta solo partidos oficiales (Grand Slam, Masters, ATP Tour, Finals, Copa Davis y JJ. OO.).
 
-- **Recomendación:** quitarlo, para que el % de victorias coincida con el de atptour.com, que es lo que conoce la gente. También evita que un joven como Fonseca sume títulos Challenger.
-- **Cómo decidir:** el jueves, consultar a 1 tenista de las dos formas (2 consultas) y comparar. Se cambia en una sola línea de `fetchCatalog`.
-- Tiene que ser **igual para todos** los tenistas (regla del kit: no mezclar criterios).
+- **Hoy:** `fetchCatalog` usa `includeAll=true`. Las dos respuestas están guardadas para comparar: `fixtures/player-statistics.json` (con el parámetro) y `fixtures/player-statistics-main-tour.json` (sin él).
+- **Alternativa:** quitarlo hace que el % de victorias coincida con el de atptour.com y evita que un tenista joven sume títulos Challenger. Es un cambio de una sola línea en `fetchCatalog`.
+- Sea cual sea, tiene que ser **igual para todos** los tenistas: no se mezclan criterios entre cartas.
 
 ### 4. Cuota del plan FREE: alcanza justo
 
@@ -68,7 +68,6 @@ El servidor ahora incluye el `message` de RapidAPI en el error, así se sabe cu�
 
 ## Qué cambió en el código
 
-- `servidor_api/adapter.mjs`: `parseRecord()` para `total`; títulos solo desde `totalTitlesWon`.
-- `servidor_api/server.mjs`: el error incluye la explicación de RapidAPI.
-- `servidor_api/adapter.test.mjs`: 4 pruebas, una con la respuesta de ejemplo oficial.
-- Guía de [Sebastián, día 2](guias/sebastian/dia2.md), actualizada con todo lo anterior.
+- `app_flutter/servidor_api/adapter.mjs`: `parseRecord()` para `total`; títulos solo desde `totalTitlesWon`.
+- `app_flutter/servidor_api/server.mjs`: el error incluye la explicación de RapidAPI.
+- `app_flutter/servidor_api/adapter.test.mjs`: 5 pruebas, una con la respuesta de ejemplo oficial y otra con las respuestas reales de `fixtures/`.
