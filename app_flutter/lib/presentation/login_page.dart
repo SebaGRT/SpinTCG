@@ -8,19 +8,58 @@ import 'theme.dart';
 import 'validadores.dart';
 import 'widgets/court_button.dart';
 
-class AuthGate extends StatelessWidget {
-  final AppController app;
-  const AuthGate({super.key, required this.app});
+/// Con sesión muestra la app; sin sesión, el ingreso. Cada cuenta tiene su
+/// propio progreso: si entra otra cuenta, se crea otro AppController, que
+/// lee el archivo de esa cuenta.
+class AuthGate extends StatefulWidget {
+  final AppController Function(String userId) controllerFor;
+  const AuthGate({super.key, required this.controllerFor});
+
+  @override
+  State<AuthGate> createState() => _AuthGateState();
+}
+
+class _AuthGateState extends State<AuthGate> {
+  AppController? app; // el progreso de la cuenta conectada
+  String? userId;
+
+  /// El controlador de esta cuenta. Si cambió la cuenta, crea uno nuevo y
+  /// carga su progreso; el anterior se libera cuando ya no se dibuja.
+  AppController controllerFor(String id) {
+    if (id != userId) {
+      final old = app;
+      if (old != null) {
+        WidgetsBinding.instance.addPostFrameCallback((_) => old.dispose());
+      }
+      userId = id;
+      app = widget.controllerFor(id)..load();
+    }
+    return app!;
+  }
+
+  @override
+  void dispose() {
+    app?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final session = context.watch<SessionController>();
-    if (session.user != null) return CourtApp(app: app);
-    return MaterialApp(
-      title: kBrand,
-      theme: buildTheme(),
-      debugShowCheckedModeBanner: false,
-      home: const LoginPage(),
+    final user = context.watch<SessionController>().user;
+    if (user == null) {
+      return MaterialApp(
+        title: kBrand,
+        theme: buildTheme(),
+        debugShowCheckedModeBanner: false,
+        home: const LoginPage(),
+      );
+    }
+    final app = controllerFor(user.id);
+    // La key hace que la app se arme de nuevo (pestaña Inicio) al cambiar
+    // de cuenta. Provider comparte el AppController de ESTA cuenta.
+    return ChangeNotifierProvider.value(
+      value: app,
+      child: CourtApp(key: ValueKey(user.id), app: app),
     );
   }
 }

@@ -12,10 +12,7 @@ import 'presentation/login_page.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   const baseUrl = String.fromEnvironment('API_BASE_URL');
-  final controller = AppController(
-    CatalogRepository(baseUrl),
-    FileLocalStore(baseUrl.isEmpty ? 'demo' : 'rapidapi'),
-  );
+  const mode = baseUrl == '' ? 'demo' : 'rapidapi';
 
   if (cloudEnabled) {
     await Supabase.initialize(url: supabaseUrl, publishableKey: supabaseKey);
@@ -23,15 +20,25 @@ Future<void> main() async {
     runApp(
       MultiProvider(
         providers: [
-          ChangeNotifierProvider.value(value: controller),
           ChangeNotifierProvider(create: (_) => SessionController(db.auth)),
           Provider(create: (_) => TeamsRepository(db)),
         ],
-        child: AuthGate(app: controller),
+        // Cada cuenta tiene su propio progreso: su propio archivo.
+        child: AuthGate(
+          controllerFor: (userId) => AppController(
+            CatalogRepository(baseUrl),
+            FileLocalStore('${mode}_$userId'),
+          ),
+        ),
       ),
     );
   } else {
+    // Sin supabase.json: la app de siempre, sin cuenta (modo demo).
+    final controller = AppController(
+      CatalogRepository(baseUrl),
+      FileLocalStore(mode),
+    );
     runApp(CourtApp(app: controller));
+    await controller.load();
   }
-  await controller.load();
 }

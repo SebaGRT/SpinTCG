@@ -78,7 +78,7 @@
 Qué se puede hacer:
 * **Coleccionar:** la primera vez recibes 6 cartas al azar. Cada día puedes abrir un **sobre** con 3 cartas más, y las repetidas se acumulan como copias.
 * **Armar un equipo** de 3 tenistas y jugar **partidas de 3 rondas** contra la computadora. Ronda 1: gana el ranking menor. Ronda 2: más títulos. Ronda 3: mayor % de victorias. Cada carta se usa una sola vez.
-* **Seguir tu progreso:** perfil con apodo, partidas jugadas y victorias. El progreso queda guardado en el teléfono y funciona sin internet después de la primera carga.
+* **Seguir tu progreso:** perfil con apodo, partidas jugadas y victorias. Cada cuenta tiene su propio progreso, guardado en el teléfono, y funciona sin internet después de la primera carga.
 * **Tener una cuenta:** registro e ingreso con Supabase. Tus **equipos guardados** quedan en la nube: puedes crearlos, verlos, cambiarles el nombre, borrarlos y volver a usarlos.
 * **Consultar el ranking ATP** pedido en el momento a la API de tenis.
 
@@ -89,7 +89,7 @@ flowchart LR
   App["App Flutter<br/>(Android · Linux)"] -- "GET /catalog" --> Srv["servidor_api<br/>Node · caché 24 h"]
   Srv -- "X-RapidAPI-Key" --> API["Tennis API<br/>Matchstat · RapidAPI"]
   App -- "Auth + tabla equipos (RLS)" --> SB["Supabase"]
-  App -- "progreso" --> Local["Archivo local<br/>(path_provider)"]
+  App -- "progreso de cada cuenta" --> Local["Archivo local por usuario<br/>(path_provider)"]
 ```
 
 **Requisitos del curso y dónde se cumplen:**
@@ -244,7 +244,7 @@ cd app_flutter/servidor_api && node --test adapter.test.mjs
 - [x] Catálogo, colección y sobre diario
 - [x] Partidas de 3 rondas contra la computadora
 - [x] Servidor intermedio con caché y presupuesto de consultas
-- [x] Progreso local que sobrevive al reinicio y funciona sin internet
+- [x] Progreso local por cuenta, que sobrevive al reinicio y funciona sin internet
 - [x] Cuenta de Supabase y equipos guardados con RLS
 - [x] Ranking ATP con `FutureBuilder`, Hero y animaciones implícitas
 - [ ] Publicar el servidor con HTTPS, para compilar una APK *release*
